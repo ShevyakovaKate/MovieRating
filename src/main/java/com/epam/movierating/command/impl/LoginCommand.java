@@ -31,15 +31,16 @@ public class LoginCommand implements Command {
 
         if(user == null) {
             requestContent.setSessionAttributes("errorMessage", "vse huevo");
-            return new RequestResult("jsp/login.jsp", NavigationType.FORWARD);
+            return new RequestResult("jsp/homepage.jsp", NavigationType.REDIRECT);
         }
 
         requestContent.setSessionAttributes("user", user);
+        requestContent.setSessionAttributes("user_type", user.getRole().toString());
 
         if(user.getRole() == Role.USER) {
-            return new RequestResult("jsp/user-home.jsp", NavigationType.FORWARD);
+            return new RequestResult("jsp/user/user-home.jsp", NavigationType.REDIRECT);
         }
 
-        return new RequestResult("jsp/admin-home.jsp", NavigationType.FORWARD);
+        return new RequestResult("jsp/admin/admin-home.jsp", NavigationType.REDIRECT);
     }
 }

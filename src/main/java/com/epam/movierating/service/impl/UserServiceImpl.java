@@ -8,7 +8,7 @@ import com.epam.movierating.entity.User;
 import com.epam.movierating.service.ServiceException;
 import com.epam.movierating.service.UserService;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {//в сервере тоже проверку vslidation делать
     @Override
     public User login(String enterEmail, String enterPasssword) throws ServiceException {
         UserDao userDao = new UserDaoImpl();
@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean signUp(User user) throws ServiceException {
-        UserDao userDao = new UserDaoImpl();
+        UserDao userDao = new UserDaoImpl();//не создавать новый userdao
 
         User resultUser;
         try {

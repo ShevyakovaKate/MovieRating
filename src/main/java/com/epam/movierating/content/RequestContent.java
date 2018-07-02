@@ -4,7 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestContent {
+    /**
+     * Почему именно 3 поля и в каких именно случаях мне помогает реквест контент
+     * зачем сделала переслойку, така архитектура для обработки ajax или jquery*/
+
+    public static final String NUMBER_OF_PAGES = "noOfPages";
+    public static final String CURRENT_PAGE = "current_page";
+    public static final String PAGINATION_URL = "urlForPagination";
     private static final String PARAM_COMMAND = "command";
+
     private Map<String, Object> requestAttributes;
     private Map<String, String[]> requestParameters;
     private Map<String, Object> sessionAttributes;
@@ -34,6 +42,17 @@ public class RequestContent {
         return null;
     }
 
+    private String buildUrlForPagination(String commandParameters) {
+        String commandName = getCommandName();
+        return "/controller?command="+commandName+commandParameters;
+    }
+
+    public void setSessionAttributesForPagination(int numberOfPages, int pageNumber, String parameters) {
+        this.setSessionAttributes(NUMBER_OF_PAGES, numberOfPages);
+        this.setSessionAttributes(CURRENT_PAGE, pageNumber);
+        this.setSessionAttributes(PAGINATION_URL, buildUrlForPagination(parameters));
+    }
+
     public String getCommandName() {
         return requestParameters.get(PARAM_COMMAND)[0].toUpperCase();
     }
@@ -49,6 +68,24 @@ public class RequestContent {
 
     public void setSessionAttributes(String name, Object attribute) {
         sessionAttributes.put(name, attribute);
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Object getSessionAttributeByName(String attributeName) {
+        return sessionAttributes.get(attributeName);
+    }
+
+    public void sessionInvalidate() {
+        requestAttributes = new HashMap<>();
+        sessionAttributes = new HashMap<>();
+        requestParameters = new HashMap<>();
     }
 
 }

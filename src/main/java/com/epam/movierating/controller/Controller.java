@@ -6,8 +6,11 @@ import com.epam.movierating.content.HttpRequestHelper;
 import com.epam.movierating.content.NavigationType;
 import com.epam.movierating.content.RequestContent;
 import com.epam.movierating.content.RequestResult;
+import com.epam.movierating.pool.ConnectionPool;
+import com.epam.movierating.pool.ConnectionPoolException;
 import com.epam.movierating.service.ServiceException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,14 +59,25 @@ public class Controller extends HttpServlet {
         httpRequestHelper.addDataToHttpRequest(request);
 
         forwardOrRedirect(request, response, page, navigationType);
-
-
     }
 
     private void forwardOrRedirect(HttpServletRequest request, HttpServletResponse response,
                                    String page, NavigationType navigationType) throws ServletException, IOException {
-        //**here will be logic of forward or redirect*//*
-        response.sendRedirect(page);
+        /*if(page == null) {
+            page = request.getContextPath() + ConfigurationManager.getProperty(Paths.ERROR_PAGE);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
+            requestDispatcher.forward(request, response);
+        }*/
 
+        if (navigationType == NavigationType.FORWARD) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
+            requestDispatcher.forward(request, response);
+        } else if (navigationType == NavigationType.REDIRECT) {
+            response.sendRedirect(page);
+        }
     }
+
+
+
+
 }

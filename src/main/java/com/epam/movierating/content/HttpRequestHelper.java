@@ -23,7 +23,7 @@ public class HttpRequestHelper {
         Map<String, Object> requestAttributes = content.getRequestAttributes();
         Map<String, Object> sessionAttributes = content.getSessionAttributes();
         requestAttributes.forEach((key, value)-> request.setAttribute(key, value));
-        sessionAttributes.forEach((key, value)-> request.setAttribute(key, value));
+        sessionAttributes.forEach((key, value)-> request.getSession().setAttribute(key, value));
     }
 
     public void setRequestAttributes(HttpServletRequest request) {

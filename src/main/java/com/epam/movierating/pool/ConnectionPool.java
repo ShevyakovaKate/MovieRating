@@ -36,7 +36,6 @@ public final class ConnectionPool {
     }
 
     private void initPoolData() throws ConnectionPoolException {
-        Locale.setDefault(Locale.ENGLISH);
         try {
             Class.forName(driverName);
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
@@ -79,12 +78,14 @@ public final class ConnectionPool {
     }
 
 
-    public void dispose() { clearConnectionQueue();
+    public void dispose() {
+        clearConnectionQueue();
     }
 
     private void clearConnectionQueue() {
         try {
-            closeConnectionsQueue(givenAwayConQueue); closeConnectionsQueue(connectionQueue);
+            closeConnectionsQueue(givenAwayConQueue);
+            closeConnectionsQueue(connectionQueue);
         } catch (SQLException e) {
 // logger.log(Level.ERROR, "Error closing the connection.", e);
         }
