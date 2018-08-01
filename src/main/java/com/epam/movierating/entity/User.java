@@ -1,23 +1,31 @@
 package com.epam.movierating.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class User implements Serializable {
+    private static final long serialVersionUID = 6199909159857713271L;
     private int id;
     private String email;
     private String password;
     private String name;
     private double raiting;
+    private LocalDate birthday;
+    private String city;
+    private String info;
     private Role role;
 
     public User(){}
 
-    public User(int id, String email, String password, String name, double raiting, Role role) {
-        this.id = id;
+    public User(String email, String password, String name, double raiting, LocalDate birthday, String city, String info, Role role) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.raiting = raiting;
+        this.birthday = birthday;
+        this.city = city;
+        this.info = info;
         this.role = role;
     }
 
@@ -61,6 +69,30 @@ public class User implements Serializable {
         this.raiting = raiting;
     }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -81,6 +113,9 @@ public class User implements Serializable {
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (birthday != null ? !birthday.equals(user.birthday) : user.birthday != null) return false;
+        if (city != null ? !city.equals(user.city) : user.city != null) return false;
+        if (info != null ? !info.equals(user.info) : user.info != null) return false;
         return role == user.role;
     }
 
@@ -94,6 +129,9 @@ public class User implements Serializable {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         temp = Double.doubleToLongBits(raiting);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (info != null ? info.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
@@ -106,6 +144,9 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", raiting=" + raiting +
+                ", birthday=" + birthday +
+                ", city='" + city + '\'' +
+                ", info='" + info + '\'' +
                 ", role=" + role +
                 '}';
     }

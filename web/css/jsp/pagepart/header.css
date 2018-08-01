@@ -1,0 +1,16 @@
+.dropdown-menu {
+    overflow: auto;
+    min-width: 5em;
+}
+.error input,
+.error textarea {
+    border: 1px solid red;
+}
+
+.error {
+    color: red;
+}
+
+.error-message {
+    color: red;
+}

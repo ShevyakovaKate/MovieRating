@@ -4,6 +4,6 @@ public enum Role {
     USER, ADMIN;
 
     public String getDbId(){
-        return ADMIN.equals(this)?"1":"2";
+        return ADMIN.equals(this) ? "1" : "2";
     }
 }

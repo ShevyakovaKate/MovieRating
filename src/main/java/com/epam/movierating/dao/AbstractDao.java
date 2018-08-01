@@ -5,7 +5,7 @@ import java.sql.Connection;
 public abstract class AbstractDao {
     protected Connection connection;
 
-    void setConnection(Connection connection) {
+    public void setConnection(Connection connection) {
         this.connection = connection;
     }
 }

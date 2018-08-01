@@ -1,0 +1,19 @@
+.animated {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+}
+
+
+.line {
+    display: inline-block;
+    margin: 0.25em;
+}
+
+.row {
+    overflow: hidden;
+}
+
+.line {
+    float: left;
+}

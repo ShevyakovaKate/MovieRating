@@ -1,14 +1,14 @@
 package com.epam.movierating.controller;
 
-import com.epam.movierating.command.Command;
-import com.epam.movierating.command.factory.FactoryCommand;
-import com.epam.movierating.content.HttpRequestHelper;
-import com.epam.movierating.content.NavigationType;
-import com.epam.movierating.content.RequestContent;
-import com.epam.movierating.content.RequestResult;
-import com.epam.movierating.pool.ConnectionPool;
-import com.epam.movierating.pool.ConnectionPoolException;
+import com.epam.movierating.controller.command.Command;
+import com.epam.movierating.controller.command.factory.FactoryCommand;
+import com.epam.movierating.controller.content.HttpRequestHelper;
+import com.epam.movierating.controller.content.NavigationType;
+import com.epam.movierating.controller.content.RequestContent;
+import com.epam.movierating.controller.content.RequestResult;
 import com.epam.movierating.service.ServiceException;
+import com.epam.movierating.util.resourse.ConfigurationManager;
+import com.epam.movierating.util.resourse.Paths;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -63,11 +63,11 @@ public class Controller extends HttpServlet {
 
     private void forwardOrRedirect(HttpServletRequest request, HttpServletResponse response,
                                    String page, NavigationType navigationType) throws ServletException, IOException {
-        /*if(page == null) {
+        if(page == null) {
             page = request.getContextPath() + ConfigurationManager.getProperty(Paths.ERROR_PAGE);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
             requestDispatcher.forward(request, response);
-        }*/
+        }
 
         if (navigationType == NavigationType.FORWARD) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(page);
@@ -76,8 +76,4 @@ public class Controller extends HttpServlet {
             response.sendRedirect(page);
         }
     }
-
-
-
-
 }
